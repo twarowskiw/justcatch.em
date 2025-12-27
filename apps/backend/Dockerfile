@@ -1,5 +1,9 @@
 # syntax=docker/dockerfile:1
+
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+
+# Image metadata (does not affect runtime behavior)
+LABEL org.opencontainers.image.title="justcatch-backend"
 WORKDIR /src
 
 COPY src/JustCatch.Backend/JustCatch.Backend.csproj ./src/JustCatch.Backend/

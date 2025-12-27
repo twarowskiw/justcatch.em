@@ -1,0 +1,43 @@
+services:
+  traefik:
+    image: traefik:v3.2
+    command:
+      - --api.dashboard=true
+      - --api.insecure=true
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  backend:
+    image: justcatch-backend
+    build:
+      context: ./apps/backend
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+      - NTP_HOST=${NTP_HOST:-time.google.com}
+      - POKEAPI_BASE_URL=${POKEAPI_BASE_URL:-https://pokeapi.co/api/v2}
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.backend.rule=PathPrefix(`/api`)
+      - traefik.http.routers.backend.entrypoints=web
+      - traefik.http.routers.backend.priority=100
+      - traefik.http.services.backend.loadbalancer.server.port=8080
+
+  frontend:
+    image: justcatch-frontend
+    build:
+      context: ./apps/frontend
+    depends_on:
+      - backend
+    environment:
+      - INTERNAL_BACKEND_URL=http://backend:8080
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.frontend.rule=PathPrefix(`/`)
+      - traefik.http.routers.frontend.entrypoints=web
+      - traefik.http.routers.frontend.priority=1
+      - traefik.http.services.frontend.loadbalancer.server.port=3000

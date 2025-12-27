@@ -1,0 +1,12 @@
+# syntax=docker/dockerfile:1
+# Dev-only base image for dotnet watch.
+# Keeps the runtime root filesystem as the official .NET SDK image, while
+# allowing compose to name/tag the resulting image safely.
+FROM mcr.microsoft.com/dotnet/sdk:8.0
+
+ARG DEV_IMAGE_BUST=0
+WORKDIR /src
+
+# Ensure we don't inherit an ENTRYPOINT from any previously-tagged local images.
+# (This makes the compose `command:` take full effect.)
+ENTRYPOINT []

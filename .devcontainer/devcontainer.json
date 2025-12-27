@@ -22,7 +22,7 @@
       }
     }
   },
-  "forwardPorts": [3000, 8080],
+  "forwardPorts": [3000],
   "remoteUser": "vscode",
   "postCreateCommand": "echo 'Dev container ready' && node --version && pnpm --version && dotnet --info",
   "workspaceFolder": "/workspaces/justcatch.em"

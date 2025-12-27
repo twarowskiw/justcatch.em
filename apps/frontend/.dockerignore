@@ -1,0 +1,13 @@
+**/.next
+**/node_modules
+coverage
+dist
+out
+.vscode
+*.log
+.git
+.gitignore
+Dockerfile
+**/*.test.*
+**/src/test
+vitest.config.*

@@ -4,14 +4,13 @@ using JustCatch.Backend.Services;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddCorsFromEnv(this IServiceCollection services)
+    public static IServiceCollection AddCorsFromTraefik(this IServiceCollection services)
     {
         services.AddCors(options =>
         {
             options.AddDefaultPolicy(policy =>
             {
-                var origin = Environment.GetEnvironmentVariable("FRONTEND_ORIGIN") ?? "http://localhost:3000";
-                policy.WithOrigins(origin)
+                policy.WithOrigins("http://localhost:3000")
                     .AllowAnyHeader()
                     .AllowAnyMethod();
             });

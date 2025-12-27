@@ -1,0 +1,17 @@
+:root {
+  /* Keep the VGA look everywhere */
+  font-family: var(--font-ibm-vga), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+  background: #fdfdfd;
+  color: #292929;
+  font-size: 12px;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}

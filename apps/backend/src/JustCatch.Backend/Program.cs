@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddCorsFromEnv();
+builder.Services.AddCorsFromTraefik();
 
 builder.Services.AddMemoryCache();
 
