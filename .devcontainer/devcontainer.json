@@ -1,0 +1,29 @@
+{
+  "name": "justcatch.em Dev Container",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-dotnettools.csharp",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "ms-azuretools.vscode-docker"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.profiles.linux": {
+          "zsh": {
+            "path": "/bin/zsh"
+          }
+        }
+      }
+    }
+  },
+  "forwardPorts": [3000, 8080],
+  "remoteUser": "vscode",
+  "postCreateCommand": "echo 'Dev container ready' && node --version && pnpm --version && dotnet --info",
+  "workspaceFolder": "/workspaces/justcatch.em"
+}

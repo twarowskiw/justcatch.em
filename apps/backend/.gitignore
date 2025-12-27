@@ -1,0 +1,13 @@
+# Backend (.NET)
+
+bin/
+obj/
+
+# Rider / VS
+.vs/
+*.user
+*.suo
+
+# Test artifacts
+TestResults/
+
