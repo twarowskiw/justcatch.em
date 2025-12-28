@@ -15,8 +15,11 @@ const Form = styled(Box)(({ theme }) => ({
     padding: '32px',
     backgroundColor: theme.palette.background.paper,
     border: '1px solid',
-    borderColor: theme.palette.grey[100],
+    borderColor: theme.palette.grey[400],
     borderRadius: '2px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '24px',
 }))
 
 const DateText = styled(Typography)(({ theme }) => ({

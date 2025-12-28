@@ -6,24 +6,26 @@ export const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#9445fa',
-      dark: '#6f34bc',
-      light: '#6f34bc'
+      main: '#9747FF',
+      dark: '#7135BF',
+      light: '#9747FF40'
     },
     error: {
-      main: '#fb4c4c'
+      main: '#FF4E4E'
     },
     background: {
       default: '#fdfdfd',
-      paper: '#fdfdfd'
+      paper: '#fdfdfd',
     },
     text: {
       primary: '#292929',
       secondary: '#7c7c7c'
     },
     grey: {
-      100: '#eeeeee',
-      200: '#7f7f7f',
+      100: '#2A2A2A',
+      200: '#7F7F7F',
+      300: '#E4E4E4',
+      400: '#EEEEEE',
     }
   },
   typography: {
@@ -116,18 +118,21 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: '#fdfdfd',
+          borderRadius: '2px',
           '& .MuiOutlinedInput-notchedOutline': {
             borderColor: '#eeeeee',
-            top: 0
+            top: 0,
+            borderRadius: '2px'
           },
           '& .MuiOutlinedInput-notchedOutline legend': {
             display: 'none'
           },
           '&:hover .MuiOutlinedInput-notchedOutline': {
-            borderColor: '#6f34bc'
+            border: '1px solid #9445fa'
           },
           '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-            borderColor: '#6f34bc'
+            border: '1px solid #9445fa',
+            boxShadow: '0px 0px 0px 4px #9747FF40'
           },
           '&.Mui-error .MuiOutlinedInput-notchedOutline': {
             borderColor: '#fb4c4c'

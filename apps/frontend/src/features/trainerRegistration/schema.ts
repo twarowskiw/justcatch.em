@@ -22,8 +22,8 @@ export const trainerRegistrationSchema = z.object({
 
 export type TrainerRegistrationFormValues = z.infer<typeof trainerRegistrationSchema>
 
-export const trainerRegistrationDefaults: TrainerRegistrationFormValues = {
+export const trainerRegistrationDefaults: Partial<TrainerRegistrationFormValues> = {
   name: '',
-  age: 16,
+  age: undefined,
   pokemon: { id: 0, name: '' }
 }
