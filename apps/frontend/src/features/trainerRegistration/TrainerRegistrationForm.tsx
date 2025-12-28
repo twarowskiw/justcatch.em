@@ -147,7 +147,7 @@ export function TrainerRegistrationForm() {
             </Backdrop>
           ) : null}
 
-          {pokemonQuery.data ? <PokemonPreviewCard pokemon={pokemonQuery.data} /> : null}
+          <PokemonPreviewCard pokemon={pokemonQuery.data} />
         </Box>
 
         {fatalError ? <Alert severity="error">Something went wrong</Alert> : null}

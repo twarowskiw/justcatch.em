@@ -33,6 +33,9 @@ export const theme = createTheme({
       'var(--font-ibm-vga), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
     subtitle1: {
       color: '#292929'
+    },
+    body1: {
+      fontSize: '14px'
     }
   },
   shape: {
