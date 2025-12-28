@@ -6,7 +6,7 @@ export const trainerRegistrationSchema = z.object({
     .min(2, 'Required from 2 to 20 symbols')
     .max(20, 'Required from 2 to 20 symbols'),
   age: z
-    .number({ invalid_type_error: 'Age is required' })
+    .number({ invalid_type_error: 'Age must be a number' })
     .int('Age must be a whole number')
     .min(16, 'Required range from 16-99')
     .max(99, 'Required range from 16-99'),
