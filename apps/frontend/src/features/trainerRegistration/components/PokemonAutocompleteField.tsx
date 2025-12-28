@@ -73,7 +73,7 @@ export function PokemonAutocompleteField({
           renderInput={(params) => (
             <TextField
               {...params}
-              label="Pokémon name"
+              label="Pokemon name"
               placeholder="Choose"
               error={!!errors.pokemon}
               helperText={errors.pokemon?.message}

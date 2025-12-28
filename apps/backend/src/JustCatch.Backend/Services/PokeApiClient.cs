@@ -32,8 +32,7 @@ public sealed class PokeApiClient : IPokeApiClient
             return null;
         }
 
-        var imageUrl = dto.Sprites?.Other?.OfficialArtwork?.FrontDefault
-                       ?? dto.Sprites?.FrontDefault;
+        var imageUrl = dto.Sprites?.FrontDefault ?? dto.Sprites?.Other?.OfficialArtwork?.FrontDefault;
 
         return new PokemonDetails(
             dto.Id,
