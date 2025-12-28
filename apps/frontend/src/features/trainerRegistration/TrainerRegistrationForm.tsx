@@ -23,6 +23,26 @@ import {
   trainerRegistrationSchema,
   type TrainerRegistrationFormValues
 } from './schema'
+import { styled } from '@mui/material/styles'
+
+const Form = styled('form')(({ theme }) => ({
+  width: 480,
+  maxWidth: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  flexWrap: 'wrap',
+  gap: theme.spacing("24px")
+}))
+
+const Row = styled('div')(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'row',
+  gap: theme.spacing("24px")
+}))
+
+const Field = styled(Box)({
+  flex: 1
+})
 
 export function TrainerRegistrationForm() {
   const [successOpen, setSuccessOpen] = useState(false)
@@ -89,54 +109,63 @@ export function TrainerRegistrationForm() {
 
   return (
     <>
-      <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
-        <Stack spacing={2}>
-          <TrainerNameField control={control} errors={errors} />
-          <TrainerAgeField control={control} errors={errors} />
-          <PokemonAutocompleteField
-            control={control}
-            errors={errors}
-            options={options}
-            query={suggestionsQuery}
-            searchInput={searchInput}
-            setSearchInput={setSearchInput}
-          />
+      <Form onSubmit={handleSubmit(onSubmit)} noValidate>
+        <Row>
+          <Field>
+            <TrainerNameField control={control} errors={errors} />
+          </Field>
+          <Field>
+            <TrainerAgeField control={control} errors={errors} />
+          </Field>
+        </Row>
+        <PokemonAutocompleteField
+          control={control}
+          errors={errors}
+          options={options}
+          query={suggestionsQuery}
+          searchInput={searchInput}
+          setSearchInput={setSearchInput}
+        />
 
-          {/* Testing hook: lets component tests set a selected Pokémon without relying on MUI Autocomplete popper behavior in jsdom. */}
-          {process.env.NODE_ENV === 'test' ? (
-            <input
-              type="hidden"
-              data-testid="selected-pokemon-id"
-              value={selected?.id ?? 0}
-              readOnly
-            />
+        {/* Testing hook: lets component tests set a selected Pokémon without relying on MUI Autocomplete popper behavior in jsdom. */}
+        {process.env.NODE_ENV === 'test' ? (
+          <input
+            type="hidden"
+            data-testid="selected-pokemon-id"
+            value={selected?.id ?? 0}
+            readOnly
+          />
+        ) : null}
+
+        <Box>
+          {pokemonQuery.isFetching && hasSelectedPokemon ? (
+            <Backdrop
+              open
+              sx={{ position: 'absolute', color: '#fff', zIndex: (t) => t.zIndex.modal + 1 }}
+            >
+              <CircularProgress color="inherit" />
+            </Backdrop>
           ) : null}
 
-          <Box sx={{ mt: 1 }}>
-            {pokemonQuery.isFetching && hasSelectedPokemon ? (
-              <Backdrop
-                open
-                sx={{ position: 'absolute', color: '#fff', zIndex: (t) => t.zIndex.modal + 1 }}
-              >
-                <CircularProgress color="inherit" />
-              </Backdrop>
-            ) : null}
+          <PokemonPreviewCard pokemon={pokemonQuery.data} />
+        </Box>
 
-            {pokemonQuery.data ? <PokemonPreviewCard pokemon={pokemonQuery.data} /> : null}
-          </Box>
+        {fatalError ? <Alert severity="error">Something went wrong</Alert> : null}
 
-          {fatalError ? <Alert severity="error">Something went wrong</Alert> : null}
-
-          <Stack direction="row" spacing={2} justifyContent="flex-end" sx={{ pt: 1 }}>
-            <Button variant="outlined" onClick={resetForm} type="button">
-              Reset
-            </Button>
-            <Button variant="contained" type="submit" disabled={isSubmitting}>
-              Submit
-            </Button>
-          </Stack>
+        <Stack direction="row" spacing={2} justifyContent="flex-end">
+          <Button
+            variant="contained"
+            onClick={resetForm}
+            type="button"
+            sx={(t) => ({ backgroundColor: t.palette.grey[400], color: t.palette.text.primary, '&:hover': { backgroundColor: t.palette.grey[300] } })}
+          >
+            Reset
+          </Button>
+          <Button variant="contained" type="submit" disabled={isSubmitting}>
+            Submit
+          </Button>
         </Stack>
-      </Box>
+      </Form>
 
       <SuccessDialog open={successOpen} onClose={() => setSuccessOpen(false)} onReset={resetForm} />
     </>
