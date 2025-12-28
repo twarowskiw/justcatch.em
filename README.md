@@ -1,61 +1,45 @@
+
 # justcatch.em
 
-A small full‑stack demo app: register a Pokémon Trainer (name, age, and one starter Pokémon).
+## Tech
 
-## Stack
+- Frontend: Next.js (App Router) + React + TypeScript, MUI (Emotion), React Hook Form + Zod, TanStack Query, Vitest
+- Backend: .NET 8 Minimal API
+- Infra: Docker + Docker Compose
 
-- Frontend: Next.js (App Router) + TypeScript + MUI + Emotion
-- Backend: .NET 8 Minimal API + Swagger
-- Infra: Docker Compose
-- Backend data source: `apps/backend/assets/pokemon.json`
+## Run
 
-## Docs
+### Docker (production)
 
-- `AGENTS.md` — instructions for Copilot/AI agents
-- `ARCHITECTURE.md` — architecture and API contracts
-- `ADR/0001-tech-stack.md` — technology decisions
-
-## Running
-
-### Production-ish (Traefik, single exposed port)
-
-The stack is fronted by Traefik. Only **one** port is exposed on the host (whatever is mapped to Traefik in `docker-compose.yml`).
-
-Run:
-
-```zsh
+```bash
 docker compose up --build
 ```
 
-Then open:
+### Docker (development)
 
-- App: `http://localhost/`
-- Backend (via Traefik): `http://localhost/api/time`
-
-### Dev / Hot reload (Traefik + dotnet watch + next dev)
-
-For hot reload while still using Traefik routing, use the dev compose override:
-
-```zsh
-cd /path/to/justcatch.em
-docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build
+```bash
+docker compose -f docker-compose.dev.yml -f docker-compose.dev.override.yml up --build
 ```
 
-This runs:
+### Devcontainer
 
-- frontend as `next dev` (HMR)
-- backend as `dotnet watch`
-- Traefik routes:
-	- `/api/*`  backend
-	- everything else  frontend
+1) VS Code: “Dev Containers: Reopen in Container”
 
-In dev, Swagger UI is available via Traefik at:
+2) Then run either:
 
-- Swagger UI: `http://localhost/swagger`
+```bash
+docker compose -f docker-compose.dev.yml -f docker-compose.dev.override.yml up --build
+```
 
-## Assets
+or (no Docker):
 
-Assets currently live in `assets (to be moved)/` and should be moved into app-specific locations during implementation.
+```bash
+cd apps/backend/src/JustCatch.Backend
+dotnet run
+```
 
-- `pokemon.json` → `apps/backend/assets/pokemon.json` (source list for fuzzy search)
-- `Web437_IBM_VGA_9x16.woff` → `apps/frontend/public/fonts/Web437_IBM_VGA_9x16.woff` (IBM VGA font used globally)
+```bash
+cd apps/frontend
+npm ci
+npm run dev
+```
