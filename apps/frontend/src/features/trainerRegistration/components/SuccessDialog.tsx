@@ -1,13 +1,28 @@
 'use client'
 
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Typography
-} from '@mui/material'
+import { Button, Dialog } from '@mui/material'
+import { styled } from '@mui/material/styles'
+
+const StyledDialog = styled(Dialog)({
+  '& .MuiDialog-paper': {
+    width: '380px',
+    height: '176px',
+    opacity: 1,
+    borderRadius: '2px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    gap: '20px',
+    boxShadow: '0px 4px 10px 2px #0000001A'
+  }
+})
+
+const Title = styled('h2')({
+  fontSize: '40px',
+  fontWeight: 400,
+  margin: 0
+})
 
 export function SuccessDialog({
   open,
@@ -19,24 +34,17 @@ export function SuccessDialog({
   onReset: () => void
 }) {
   return (
-    <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Success</DialogTitle>
-      <DialogContent>
-        <Typography variant="body2" sx={{ opacity: 0.85 }}>
-          Trainer registered.
-        </Typography>
-      </DialogContent>
-      <DialogActions>
-        <Button
-          variant="contained"
-          onClick={() => {
-            onClose()
-            onReset()
-          }}
-        >
-          Reset form
-        </Button>
-      </DialogActions>
-    </Dialog>
+    <StyledDialog open={open} onClose={onClose} BackdropProps={{ sx: { backgroundColor: '#00000033' } }}>
+      <Title>Success</Title>
+      <Button
+        variant="contained"
+        onClick={() => {
+          onClose()
+          onReset()
+        }}
+      >
+        Reset form
+      </Button>
+    </StyledDialog>
   )
 }
