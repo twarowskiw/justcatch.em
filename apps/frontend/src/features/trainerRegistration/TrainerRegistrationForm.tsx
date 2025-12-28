@@ -153,7 +153,12 @@ export function TrainerRegistrationForm() {
         {fatalError ? <Alert severity="error">Something went wrong</Alert> : null}
 
         <Stack direction="row" spacing={2} justifyContent="flex-end">
-          <Button variant="outlined" onClick={resetForm} type="button">
+          <Button
+            variant="contained"
+            onClick={resetForm}
+            type="button"
+            sx={(t) => ({ backgroundColor: t.palette.grey[400], color: t.palette.text.primary, '&:hover': { backgroundColor: t.palette.grey[300] } })}
+          >
             Reset
           </Button>
           <Button variant="contained" type="submit" disabled={isSubmitting}>

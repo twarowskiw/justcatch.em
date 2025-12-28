@@ -23,6 +23,7 @@ export function PokemonAutocompleteField({
   searchInput: string
   setSearchInput: (next: string) => void
 }) {
+  const emptySuggestion: SearchSuggestion = { id: 0, name: '', score: 0 }
   const [open, setOpen] = useState(false)
   const ChevronDown = ({ sx }: { sx?: any }) => (
     <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -41,20 +42,29 @@ export function PokemonAutocompleteField({
       name="pokemon"
       render={({ field }) => (
         <Autocomplete<SearchSuggestion, false, true, false>
+          disableClearable
           value={
             field.value?.id
               ? ({ id: field.value.id, name: field.value.name, score: 0 } as SearchSuggestion)
-              : undefined
+              : emptySuggestion
           }
           onChange={(_, v) => {
-            if (!v) field.onChange({ id: 0, name: '' })
-            else field.onChange({ id: v.id, name: v.name })
+            if (!v || v.id <= 0) {
+              field.onChange({ id: 0, name: '' })
+              setSearchInput('')
+              return
+            }
+
+            field.onChange({ id: v.id, name: v.name })
+            setSearchInput(v.name)
           }}
           inputValue={searchInput}
-          onInputChange={(_, v) => setSearchInput(v)}
+          onInputChange={(_, v, reason) => {
+            if (reason === 'input' || reason === 'clear') setSearchInput(v)
+          }}
           options={options}
           getOptionLabel={(o) => o.name}
-          isOptionEqualToValue={(a, b) => a.id === b.id}
+          isOptionEqualToValue={(a, b) => b.id > 0 && a.id === b.id}
           loading={query.isFetching}
           popupIcon={null}
           open={open}

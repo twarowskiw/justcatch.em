@@ -57,7 +57,12 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 0,
-          textTransform: 'none'
+          textTransform: 'none',
+          height: 40,
+          minHeight: 40,
+          fontSize: '14px',
+          paddingLeft: '24px',
+          paddingRight: '24px'
         },
         containedPrimary: {
           backgroundColor: '#9445fa',
