@@ -1,5 +1,8 @@
 {
   "name": "justcatch.em Dev Container",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
   "build": {
     "dockerfile": "Dockerfile",
     "context": ".."
@@ -22,8 +25,10 @@
       }
     }
   },
-  "forwardPorts": [3000],
+  "forwardPorts": [80, 3000, 8080],
+  "runArgs": ["--privileged"],
   "remoteUser": "vscode",
-  "postCreateCommand": "echo 'Dev container ready' && node --version && pnpm --version && dotnet --info",
-  "workspaceFolder": "/workspaces/justcatch.em"
+  "postCreateCommand": "bash -lc \"set -euo pipefail; echo 'Bootstrapping devcontainer…'; node --version; npm --version; dotnet --info; dotnet restore /workspaces/justcatch.em/justcatch.em.sln; cd /workspaces/justcatch.em/apps/frontend && npm ci; echo 'Dev container ready'\"",
+  "workspaceFolder": "/workspaces/justcatch.em",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/justcatch.em,type=bind,consistency=cached"
 }
