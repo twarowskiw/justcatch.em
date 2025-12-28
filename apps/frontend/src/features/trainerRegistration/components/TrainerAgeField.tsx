@@ -18,7 +18,7 @@ export function TrainerAgeField({
       name="age"
       render={({ field }) => (
         <TextField
-          label="Trainer age"
+          label="Trainer's age"
           type="number"
           value={Number.isFinite(field.value) ? field.value : ''}
           onChange={(e) =>

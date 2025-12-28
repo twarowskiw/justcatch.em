@@ -91,8 +91,14 @@ export function TrainerRegistrationForm() {
     <>
       <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
         <Stack spacing={2}>
-          <TrainerNameField control={control} errors={errors} />
-          <TrainerAgeField control={control} errors={errors} />
+          <Stack direction="row" spacing={3} sx={{ width: 480 }}>
+            <Box sx={{ flex: 1 }}>
+              <TrainerNameField control={control} errors={errors} />
+            </Box>
+            <Box sx={{ flex: 1 }}>
+              <TrainerAgeField control={control} errors={errors} />
+            </Box>
+          </Stack>
           <PokemonAutocompleteField
             control={control}
             errors={errors}

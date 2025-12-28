@@ -18,7 +18,7 @@ export function TrainerNameField({
       name="name"
       render={({ field }) => (
         <TextField
-          label="Trainer name"
+          label="Trainer's name"
           {...field}
           error={!!errors.name}
           helperText={errors.name?.message}

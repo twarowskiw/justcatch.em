@@ -71,8 +71,8 @@ describe('TrainerRegistrationForm', () => {
     fireEvent.click(screen.getByRole('button', { name: /submit/i }))
 
     // name field validates on blur (mode: onBlur); force blur to show errors
-    fireEvent.blur(screen.getByLabelText(/trainer name/i))
-    fireEvent.blur(screen.getByLabelText(/trainer age/i))
+    fireEvent.blur(screen.getByLabelText(/trainer's name/i))
+    fireEvent.blur(screen.getByLabelText(/trainer's age/i))
 
     expect(await screen.findByText(/name must be 2/i)).toBeInTheDocument()
     // Autocomplete field is mocked to a button in this test file.
@@ -87,12 +87,11 @@ describe('TrainerRegistrationForm', () => {
     async () => {
     renderForm()
 
-    fireEvent.change(screen.getByLabelText(/trainer name/i), { target: { value: 'Ash' } })
-    fireEvent.blur(screen.getByLabelText(/trainer name/i))
+    fireEvent.change(screen.getByLabelText(/trainer's name/i), { target: { value: 'Ash' } })
+    fireEvent.blur(screen.getByLabelText(/trainer's name/i))
 
-    fireEvent.change(screen.getByLabelText(/trainer age/i), { target: { value: '18' } })
-    fireEvent.blur(screen.getByLabelText(/trainer age/i))
-
+    fireEvent.change(screen.getByLabelText(/trainer's age/i), { target: { value: '18' } })
+    fireEvent.blur(screen.getByLabelText(/trainer's age/i))
   fireEvent.click(screen.getByRole('button', { name: /select pikachu/i }))
 
     fireEvent.click(screen.getByRole('button', { name: /submit/i }))
@@ -104,7 +103,7 @@ describe('TrainerRegistrationForm', () => {
 
     // Reset should clear name value.
     await waitFor(() => {
-      expect(screen.getByLabelText(/trainer name/i)).toHaveValue('')
+      expect(screen.getByLabelText(/trainer's name/i)).toHaveValue('')
     })
     },
     10_000

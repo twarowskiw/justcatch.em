@@ -1,6 +1,6 @@
 'use client'
 
-import { createTheme } from '@mui/material/styles'
+import { createTheme, type Theme } from '@mui/material/styles'
 
 export const theme = createTheme({
   palette: {
@@ -23,9 +23,7 @@ export const theme = createTheme({
     },
     grey: {
       100: '#eeeeee',
-      200: '#e9e9e9',
-      300: '#e0e0e0',
-      900: '#292929'
+      200: '#7f7f7f',
     }
   },
   typography: {
@@ -80,15 +78,36 @@ export const theme = createTheme({
     },
 
     MuiInputLabel: {
+      defaultProps: {
+        shrink: true
+      },
       styleOverrides: {
-        root: {
+        root: ({ theme }: { theme: Theme }) => ({
+          ...theme.typography.subtitle1,
+          lineHeight: '20px',
+          position: 'relative',
+          top: 0,
+          left: 0,
+          transform: 'none',
+          marginBottom: '2px',
           color: '#292929',
+          '&.MuiInputLabel-shrink': {
+            transform: 'none'
+          },
           '&.Mui-focused': {
             color: '#6f34bc'
           },
           '&.Mui-error': {
             color: '#fb4c4c'
           }
+        })
+      }
+    },
+
+    MuiTextField: {
+      defaultProps: {
+        InputLabelProps: {
+          shrink: true
         }
       }
     },
@@ -98,7 +117,11 @@ export const theme = createTheme({
         root: {
           backgroundColor: '#fdfdfd',
           '& .MuiOutlinedInput-notchedOutline': {
-            borderColor: '#e0e0e0'
+            borderColor: '#eeeeee',
+            top: 0
+          },
+          '& .MuiOutlinedInput-notchedOutline legend': {
+            display: 'none'
           },
           '&:hover .MuiOutlinedInput-notchedOutline': {
             borderColor: '#6f34bc'
@@ -110,12 +133,12 @@ export const theme = createTheme({
             borderColor: '#fb4c4c'
           }
         },
-        input: {
+        input: ({ theme }: { theme: Theme }) => ({
           '&::placeholder': {
-            color: '#7c7c7c',
+            color: theme.palette.grey[200],
             opacity: 1
           }
-        }
+        })
       }
     },
 
