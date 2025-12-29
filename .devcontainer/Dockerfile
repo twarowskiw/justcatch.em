@@ -6,7 +6,7 @@ FROM mcr.microsoft.com/devcontainers/dotnet:1-8.0-jammy
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
   && apt-get install -y curl ca-certificates gnupg2 lsb-release --no-install-recommends \
-  && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+  && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
   && apt-get install -y nodejs --no-install-recommends \
   && npm install -g pnpm@latest \
   && apt-get clean \
