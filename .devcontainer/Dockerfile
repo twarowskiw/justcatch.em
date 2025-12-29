@@ -8,7 +8,7 @@ RUN apt-get update \
   && apt-get install -y curl ca-certificates gnupg2 lsb-release --no-install-recommends \
   && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
   && apt-get install -y nodejs --no-install-recommends \
-  && npm install -g pnpm@latest \
+  && npm install -g npm@11.7.0 pnpm@latest \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
