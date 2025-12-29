@@ -74,7 +74,7 @@ describe('TrainerRegistrationForm', () => {
     fireEvent.blur(screen.getByLabelText(/trainer's name/i))
     fireEvent.blur(screen.getByLabelText(/trainer's age/i))
 
-    expect(await screen.findByText(/name must be 2/i)).toBeInTheDocument()
+    expect(await screen.findByText(/from 2 to 20 symbols/i)).toBeInTheDocument()
     // Autocomplete field is mocked to a button in this test file.
     expect(screen.getByRole('button', { name: /select pikachu/i })).toBeInTheDocument()
 
