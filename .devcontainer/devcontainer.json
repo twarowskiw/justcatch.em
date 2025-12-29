@@ -25,10 +25,16 @@
       }
     }
   },
-  "forwardPorts": [80, 3000, 8080],
-  "runArgs": ["--privileged"],
+  "forwardPorts": [
+    80,
+    3000,
+    8080
+  ],
+  "runArgs": [
+    "--privileged"
+  ],
   "remoteUser": "vscode",
-  "postCreateCommand": "bash -lc \"set -euo pipefail; echo 'Bootstrapping devcontainer…'; node --version; npm --version; dotnet --info; dotnet restore /workspaces/justcatch.em/justcatch.em.sln; cd /workspaces/justcatch.em/apps/frontend && npm ci; echo 'Dev container ready'\"",
+  "postCreateCommand": "bash -lc \"set -euo pipefail; echo 'Bootstrapping devcontainer…'; node --version; npm --version; dotnet --info; sudo chown -R vscode:vscode /workspaces/justcatch.em; dotnet restore /workspaces/justcatch.em/justcatch.em.sln; cd /workspaces/justcatch.em/apps/frontend && npm ci; echo 'Dev container ready'\"",
   "workspaceFolder": "/workspaces/justcatch.em",
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/justcatch.em,type=bind,consistency=cached"
 }
